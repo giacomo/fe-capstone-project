@@ -1,0 +1,46 @@
+.hero {
+    padding: 50px 0 0;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 160px;
+    width: 100%;
+    background-color: var(--background-color);
+    bottom: 0;
+}
+
+@media (max-width: 992px) {
+    .hero {
+        padding-bottom: 50px;
+    }
+
+    .hero::before {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 20px 0;
+    }
+}
+
+img {
+    max-height: 560px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.hero-heading h1 {
+    margin-bottom: 0;
+}
+
+.hero p {
+    margin-right: 20px;
+    text-wrap: balance;
+}
