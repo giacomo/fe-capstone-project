@@ -1,6 +1,8 @@
-function Nav() {
+function Nav({ isMenuOpen }) {
+  const menuClass = isMenuOpen ? 'nav-open' : '';
+  
   return (
-    <nav>
+    <nav className={menuClass}>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>

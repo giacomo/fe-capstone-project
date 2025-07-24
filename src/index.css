@@ -7,7 +7,448 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Remove default margins and padding for semantic elements */
+header, main, footer {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure full height layout */
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Markazi Text', serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 500;
+  color: #F4CE14;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #495E57;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #495E57;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 0.75rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Paragraphs */
+p {
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #495E57;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+/* Spans */
+span {
+  font-family: 'Karla', sans-serif;
+  font-size: inherit;
+  color: inherit;
+  font-weight: inherit;
+}
+
+span.highlight {
+  background-color: #F4CE14;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+span.secondary {
+  color: #EE9972;
+  font-weight: 500;
+}
+
+span.small {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* Step 3: Style navigation elements */
+/* Header styling */
+header {
+  padding: 1rem 0;
+  background: white;
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+header .row {
+  align-items: center;
+  min-height: 70px;
+  position: relative;
+}
+
+/* Header logo styling */
+.header-logo {
+  height: 50px;
+  width: auto;
+  display: block;
+  margin: auto;
+}
+
+/* Hamburger menu styling */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  z-index: 10;
+}
+
+.hamburger-menu span {
+  width: 30px;
+  height: 3px;
+  background: #495E57;
+  border-radius: 2px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.hamburger-menu:hover span {
+  background: #F4CE14;
+}
+
+/* Navigation container */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 0;
+}
+
+/* Navigation list */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Navigation list items */
+nav li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation links */
+nav a {
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #495E57;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+nav a:hover {
+  background-color: #F4CE14;
+  color: #495E57;
+  transform: translateY(-2px);
+}
+
+nav a:active {
+  transform: translateY(0);
+}
+
+/* Active navigation link */
+nav a.active {
+  background-color: #F4CE14;
+  color: #495E57;
+  font-weight: 800;
+}
+
+/* Responsive navigation */
+@media (max-width: 992px) {
+  /* Show hamburger menu on tablet and mobile */
+  .hamburger-menu {
+    display: flex;
+  }
+  
+  /* Base navigation styles for mobile */
+  nav {
+    display: block;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    transition: max-height 0.3s ease;
+    z-index: 999;
+  }
+  
+  /* Show navigation when menu is open */
+  nav.nav-open ul {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px;
+    z-index: 999;
+    padding: 20px;
+    margin: 0;
+    gap: 0;
+  }
+  
+  /* Navigation list on mobile */
+  nav:not(.nav-open) ul {
+    display: none;
+  }
+  
+  nav li {
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  nav li:last-child {
+    border-bottom: none;
+  }
+  
+  nav a {
+    padding: 15px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Responsive typography */
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* Adjust logo on mobile */
+  .header-logo {
+    height: 40px;
+    margin: 0;
+  }
+}
+
+/* Desktop navigation - ensure it's visible above 992px */
+@media (min-width: 993px) {
+  .hamburger-menu {
+    display: none !important;
+  }
+  
+  nav {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  
+  nav ul {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  nav li {
+    width: auto;
+    border-bottom: none;
+  }
+}
+
+/* 12-column grid system using CSS Grid */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 15px;
+  width: 100%;
+}
+
+[class^="col-"] {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/* Responsive breakpoints */
+@media (max-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .col-sm-1 { grid-column: span 1; }
+  .col-sm-2 { grid-column: span 2; }
+  .col-sm-3 { grid-column: span 3; }
+  .col-sm-4 { grid-column: span 4; }
+  .col-sm-5 { grid-column: span 5; }
+  .col-sm-6 { grid-column: span 6; }
+  .col-sm-7 { grid-column: span 7; }
+  .col-sm-8 { grid-column: span 8; }
+  .col-sm-9 { grid-column: span 9; }
+  .col-sm-10 { grid-column: span 10; }
+  .col-sm-11 { grid-column: span 11; }
+  .col-sm-12 { grid-column: span 12; }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+  
+  .row {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  
+  .col-md-1 { grid-column: span 1; }
+  .col-md-2 { grid-column: span 2; }
+  .col-md-3 { grid-column: span 3; }
+  .col-md-4 { grid-column: span 4; }
+  .col-md-5 { grid-column: span 5; }
+  .col-md-6 { grid-column: span 6; }
+  .col-md-7 { grid-column: span 7; }
+  .col-md-8 { grid-column: span 8; }
+  .col-md-9 { grid-column: span 9; }
+  .col-md-10 { grid-column: span 10; }
+  .col-md-11 { grid-column: span 11; }
+  .col-md-12 { grid-column: span 12; }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+  
+  .col-lg-1 { grid-column: span 1; }
+  .col-lg-2 { grid-column: span 2; }
+  .col-lg-3 { grid-column: span 3; }
+  .col-lg-4 { grid-column: span 4; }
+  .col-lg-5 { grid-column: span 5; }
+  .col-lg-6 { grid-column: span 6; }
+  .col-lg-7 { grid-column: span 7; }
+  .col-lg-8 { grid-column: span 8; }
+  .col-lg-9 { grid-column: span 9; }
+  .col-lg-10 { grid-column: span 10; }
+  .col-lg-11 { grid-column: span 11; }
+  .col-lg-12 { grid-column: span 12; }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  .col-xl-1 { grid-column: span 1; }
+  .col-xl-2 { grid-column: span 2; }
+  .col-xl-3 { grid-column: span 3; }
+  .col-xl-4 { grid-column: span 4; }
+  .col-xl-5 { grid-column: span 5; }
+  .col-xl-6 { grid-column: span 6; }
+  .col-xl-7 { grid-column: span 7; }
+  .col-xl-8 { grid-column: span 8; }
+  .col-xl-9 { grid-column: span 9; }
+  .col-xl-10 { grid-column: span 10; }
+  .col-xl-11 { grid-column: span 11; }
+  .col-xl-12 { grid-column: span 12; }
 }
