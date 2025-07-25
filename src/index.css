@@ -3,7 +3,7 @@
   --secondary-color: #495E57;
   --accent-color: #EE9972;
   --accent-light-color: #FDBABB;
-  --text-color: #333333;
+  --text-color: #495E57;
   --background-color: #FFFFFF;
   --highlight-color: #EDEFEE;
   --font-family-heading: 'Markazi Text', serif;
@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #333333;
 }
 
-h1 {
+h1, .h1 {
   font-size: 4rem;
   font-weight: 500;
   color: #F4CE14;
@@ -128,7 +128,7 @@ h6 {
   color: #333333;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.5rem;
 }
 
 /* Paragraphs */
@@ -384,14 +384,20 @@ nav a.active {
 
 /* button styles */
 button, .btn[type="button"] {
-  font-family: 'Karla', sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-family-body), sans-serif;
+  font-size: 1.25rem;
   font-weight: 700;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: .5rem;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .btn-primary {
@@ -404,6 +410,23 @@ button, .btn[type="button"] {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.btn-link {
+  background-image: linear-gradient(to right, var(--secondary-color) 100%, var(--secondary-color) 100%);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0 2px;
+  transition: background-size 0.3s ease;
+  border-radius: 0;
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 0;
+  font-weight: 700;
+}
+
+.btn-link:hover {
+  background-size: 100% 2px;
+}
+
 .btn-secondary {
   background-color: var(--secondary-color);
   color: var(--primary-color);
@@ -414,12 +437,49 @@ button, .btn[type="button"] {
   color: var(--secondary-color);
 }
 
+/* blockquote styles */
+blockquote {
+  margin: 1.5rem 10px;
+  padding: 0.5rem 10px;
+  quotes: "“" "”";
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4rem;
+  line-height: 0.1rem;
+  margin-right: 0.25rem;
+  vertical-align: -1.8rem;
+}
+
+blockquote p {
+  display: inline;
+}
+
+/* align utility classes */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.align-self-start { align-self: flex-start; }
+.align-self-end { align-self: flex-end; }
+.align-self-center { align-self: center; }
+.align-self-baseline { align-self: baseline; }
+.align-self-stretch { align-self: stretch; }
+.justify-self-start { justify-self: flex-start; }
+.justify-self-end { justify-self: flex-end; }
+.justify-self-center { justify-self: center; }
+.justify-self-stretch { justify-self: stretch; }
+
 /* create margin utility classes */
 .mt-1 { margin-top: 0.25rem; }
 .mt-2 { margin-top: 0.5rem; }
 .mt-3 { margin-top: 1rem; }
 .mt-4 { margin-top: 1.5rem; }
 .mt-5 { margin-top: 2rem; }
+.mb-0 { margin-bottom: 0 !important;}
 .mb-1 { margin-bottom: 0.25rem; }
 .mb-2 { margin-bottom: 0.5rem; }
 .mb-3 { margin-bottom: 1rem; }

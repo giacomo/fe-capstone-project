@@ -1,0 +1,37 @@
+.about {
+    padding: 40px 20px;
+    color: var(--text-color);
+}
+
+.about p {
+    text-wrap: balance;
+}
+
+.about-heading h2 {
+    margin-bottom: 0;
+}
+
+.about-image-container {
+    position: relative;
+    padding-bottom: 75%;
+}
+
+.about-image-container img {
+    width: 70%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+}
+
+.about-image-container img:nth-child(1) {
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.about-image-container img:nth-child(2) {
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
