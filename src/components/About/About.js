@@ -4,7 +4,7 @@ import marioAndAdrianB from "../../assets/mario_adrian_b.jpg";
 
 export default function About() {
     return (
-        <section className="about">
+        <section className="about" id="about">
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-6">

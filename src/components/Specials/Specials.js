@@ -36,7 +36,7 @@ const meals = [
 export default function Specials() {
     return (
         <>
-            <section className="specials">
+            <section className="specials" id="menu">
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-md-8 align-self-center">

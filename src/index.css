@@ -10,6 +10,12 @@
   --font-family-body: 'Karla', sans-serif;
 }
 
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 
 body {
   margin: 0;
@@ -383,7 +389,7 @@ nav a.active {
 }
 
 /* button styles */
-button, .btn[type="button"] {
+button, .btn[type="button"], a.btn {
   font-family: var(--font-family-body), sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
@@ -392,6 +398,10 @@ button, .btn[type="button"] {
   border-radius: .5rem;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+a.btn {
+  display: inline-block;
 }
 
 .btn-small {
@@ -405,7 +415,7 @@ button, .btn[type="button"] {
   color: var(--secondary-color);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, a.btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
