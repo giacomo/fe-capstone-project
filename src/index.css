@@ -22,6 +22,7 @@ body {
   font-family: var(--font-family-body), serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
 }
 
 /* Remove default margins and padding for semantic elements */
@@ -40,6 +41,22 @@ ul, ol {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.list-unstyled {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-unstyled-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
 }
 
 /* Resets headings */
@@ -80,8 +97,17 @@ code {
 }
 
 .bg-secondary h2,
-.bg-secondary h3 {
+.bg-secondary h3,
+.bg-secondary h5 {
     color: var(--font-family-body);
+}
+
+.bg-secondary a.btn-link {
+  color: var(--primary-color);
+}
+
+.bg-secondary a.btn-link:hover {
+  background-image: linear-gradient(to right, var(--primary-color) 100%, var(--primary-color) 100%);
 }
 
 /* Headings */
@@ -90,7 +116,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 1.2;
   margin-bottom: 1rem;
-  color: #333333;
 }
 
 h1, .h1 {
@@ -123,9 +148,9 @@ h4 {
 
 h5 {
   font-size: 1.125rem;
-  font-weight: 500;
-  color: #333333;
+  font-weight: 600;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
 h6 {
@@ -420,7 +445,7 @@ a.btn {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-link {
+.btn.btn-link {
   background-image: linear-gradient(to right, var(--secondary-color) 100%, var(--secondary-color) 100%);
   background-repeat: no-repeat;
   background-position: left bottom;
@@ -433,8 +458,12 @@ a.btn {
   font-weight: 700;
 }
 
-.btn-link:hover {
+.btn.btn-link:hover {
   background-size: 100% 2px;
+}
+
+.btn.btn-link.btn-icon {
+  padding-bottom: 0.5rem;
 }
 
 .btn-secondary {
@@ -505,6 +534,42 @@ blockquote p {
 .mr-3 { margin-right: 1rem; }
 .mr-4 { margin-right: 1.5rem; }
 .mr-5 { margin-right: 2rem; }
+
+/* Padding utility classes */
+.pt-1 { padding-top: 0.25rem; }
+.pt-2 { padding-top: 0.5rem; }
+.pt-3 { padding-top: 1rem; }
+.pt-4 { padding-top: 1.5rem; }
+.pt-5 { padding-top: 2rem; }
+.pb-0 { padding-bottom: 0 !important; }
+.pb-1 { padding-bottom: 0.25rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.pb-3 { padding-bottom: 1rem; }
+.pb-4 { padding-bottom: 1.5rem; }
+.pb-5 { padding-bottom: 2rem; }
+.pl-1 { padding-left: 0.25rem; }
+.pl-2 { padding-left: 0.5rem; }
+.pl-3 { padding-left: 1rem; }
+.pl-4 { padding-left: 1.5rem; }
+.pl-5 { padding-left: 2rem; }
+.pr-1 { padding-right: 0.25rem; }
+.pr-2 { padding-right: 0.5rem; }
+.pr-3 { padding-right: 1rem; }
+.pr-4 { padding-right: 1.5rem; }
+.pr-5 { padding-right: 2rem; }
+
+/* Flexbox utility classes */
+.d-flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.space-between {
+  justify-content: space-between;
+}
 
 /* 12-column grid system using CSS Grid */
 .container {

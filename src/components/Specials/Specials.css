@@ -6,3 +6,9 @@
     padding: 40px 0 50px 0;
     gap: 40px;
 }
+
+@media (max-width: 544px) {
+    .special-cards {
+        gap: 15px;
+    }
+}

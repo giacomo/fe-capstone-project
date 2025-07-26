@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Little Lemon",
+  "name": "Little Lemon Restaurant",
+  "description": "A delightful dining experience with a focus on fresh ingredients and Mediterranean cuisine.",
+  "lang": "en-US",
   "icons": [
     {
       "src": "favicon.ico",
