@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import React from "react";
 import NotFoundPage from "./pages/NotFoundPage";
+import ConfirmedBookingPage from "./pages/ConfirmedBookingPage";
 
 function App({content}) {
     return (
@@ -15,7 +16,8 @@ function App({content}) {
             <Routes>
                 <Route index element={<HomePage/>}/>
                 <Route path="/reservations" element={<BookingPage/>}/>
-                <Route path="/*" element={<NotFoundPage />}/>
+                <Route path="/reservations/confirmed" element={<ConfirmedBookingPage/>}/>
+                <Route path="/*" element={<NotFoundPage/>}/>
             </Routes>
             <Footer/>
         </>

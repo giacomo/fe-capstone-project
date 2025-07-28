@@ -125,7 +125,7 @@ h1, .h1 {
   margin-bottom: 1.5rem;
 }
 
-h2 {
+h2, .h2 {
   font-size: 2.5rem;
   font-weight: 400;
   color: #495E57;
@@ -414,7 +414,7 @@ nav a.active {
 }
 
 /* button styles */
-button, .btn[type="button"], a.btn {
+button, .btn[type="button"], .btn[type="submit"], a.btn {
   font-family: var(--font-family-body), sans-serif;
   font-size: 1.25rem;
   font-weight: 700;

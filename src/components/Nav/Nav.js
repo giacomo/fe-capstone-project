@@ -1,7 +1,7 @@
 import {NavLink} from "react-router";
 import {HashLink} from "react-router-hash-link";
 
-function Nav({ isMenuOpen }) {
+export default function Nav({ isMenuOpen }) {
   const menuClass = isMenuOpen ? 'nav-open' : '';
   
   return (
@@ -17,5 +17,3 @@ function Nav({ isMenuOpen }) {
     </nav>
   );
 }
-
-export default Nav;
