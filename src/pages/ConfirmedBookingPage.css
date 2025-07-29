@@ -1,0 +1,117 @@
+.confirmed-booking-page {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 60vh;
+    background: #f9fafb;
+}
+.confirmed-booking-page .message {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    max-width: 420px;
+}
+.confirmed-booking-page h1 {
+    color: #495e57;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.details-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 2rem;
+    max-width: 480px;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.details-card h2 {
+    color: #495e57;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f4ce14;
+    padding-bottom: 0.8rem;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.details-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(73, 94, 87, 0.1);
+}
+
+.details-row:last-child {
+    border-bottom: none;
+}
+
+.details-label {
+    color: #495e57;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.details-value {
+    color: #333;
+    font-weight: 400;
+}
+
+.delete-button {
+    margin-top: 2rem;
+    background-color: #ee5253;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 4px 12px rgba(238, 82, 83, 0.15);
+}
+
+.delete-button:hover {
+    background-color: #d63031;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .details-card {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .details-row {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .details-label {
+        font-size: 1rem;
+    }
+}

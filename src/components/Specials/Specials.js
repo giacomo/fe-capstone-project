@@ -39,10 +39,10 @@ export default function Specials() {
             <section className="specials" id="menu">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 col-md-8 align-self-center">
+                        <div className="col-12 col-sm-6 col-lg-8 align-self-center">
                             <h2 className="mb-0">This Weeks specials!</h2>
                         </div>
-                        <div className="col-12 col-md-4 align-self-center justify-self-end">
+                        <div className="col-12 col-sm-6 col-lg-4 align-self-center justify-self-end">
                             <button className="btn btn-primary">Online Menu</button>
                         </div>
                     </div>

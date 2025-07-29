@@ -4,6 +4,7 @@ import Main from "../components/Main/Main";
 import BookingForm from "../components/BookingForm/BookingForm";
 import { useReducer } from "react";
 import { useNavigate } from "react-router";
+import About from "../components/About/About";
 
 export function initializeTimes() {
     // Get today's date
@@ -40,10 +41,12 @@ export default function BookingPage() {
             <section className="booking-page bg-secondary">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 col-md-6">
+                        <div className="col-12">
                             <div className="heading">
                                 <h1>Reserve a table</h1>
                             </div>
+                        </div>
+                        <div className="col-12">
                             <BookingForm
                                 availableTimes={availableTimes}
                                 updateTimes={dispatch}
@@ -53,6 +56,7 @@ export default function BookingPage() {
                     </div>
                 </div>
             </section>
+            <About />
         </Main>
     );
 }

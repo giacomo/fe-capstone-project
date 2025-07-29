@@ -80,6 +80,36 @@ describe('HTML5 Validation Attributes', () => {
             expect(dateField).toHaveAttribute('min', today);
         });
     });
+
+    test('firstName field has correct HTML5 validation attributes', async () => {
+        render(
+            <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+        );
+        const firstNameField = screen.getByLabelText(/First name/i);
+        expect(firstNameField).toHaveAttribute('type', 'text');
+        expect(firstNameField).toHaveAttribute('id', 'firstName');
+        expect(firstNameField).toHaveAttribute('aria-required', 'true');
+    });
+
+    test('lastName field has correct HTML5 validation attributes', async () => {
+        render(
+            <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+        );
+        const lastNameField = screen.getByLabelText(/Last name/i);
+        expect(lastNameField).toHaveAttribute('type', 'text');
+        expect(lastNameField).toHaveAttribute('id', 'lastName');
+        expect(lastNameField).toHaveAttribute('aria-required', 'true');
+    });
+
+    test('email field has correct HTML5 validation attributes', async () => {
+        render(
+            <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+        );
+        const emailField = screen.getByLabelText(/Email/i);
+        expect(emailField).toHaveAttribute('type', 'email');
+        expect(emailField).toHaveAttribute('id', 'email');
+        expect(emailField).toHaveAttribute('aria-required', 'true');
+    });
 });
 
 describe('JavaScript Validation Functions', () => {
@@ -250,6 +280,120 @@ describe('JavaScript Validation Functions', () => {
         });
     });
 
+    describe('First Name Validation', () => {
+        test('shows error for empty first name', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const firstNameField = screen.getByLabelText(/First name/i);
+            fireEvent.blur(firstNameField);
+            await waitFor(() => {
+                expect(screen.getByText('First name is required')).toBeInTheDocument();
+            });
+        });
+
+        test('shows error for too long first name', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const firstNameField = screen.getByLabelText(/First name/i);
+            fireEvent.change(firstNameField, { target: { value: 'a'.repeat(51) } });
+            fireEvent.blur(firstNameField);
+            await waitFor(() => {
+                expect(screen.getByText('First name is too long')).toBeInTheDocument();
+            });
+        });
+
+        test('accepts valid first name', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const firstNameField = screen.getByLabelText(/First name/i);
+            fireEvent.change(firstNameField, { target: { value: 'John' } });
+            fireEvent.blur(firstNameField);
+            await waitFor(() => {
+                expect(screen.queryByText('First name is required')).not.toBeInTheDocument();
+                expect(screen.queryByText('First name is too long')).not.toBeInTheDocument();
+            });
+        });
+    });
+
+    describe('Last Name Validation', () => {
+        test('shows error for empty last name', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const lastNameField = screen.getByLabelText(/Last name/i);
+            fireEvent.blur(lastNameField);
+            await waitFor(() => {
+                expect(screen.getByText('Last name is required')).toBeInTheDocument();
+            });
+        });
+
+        test('shows error for too long last name', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const lastNameField = screen.getByLabelText(/Last name/i);
+            fireEvent.change(lastNameField, { target: { value: 'b'.repeat(51) } });
+            fireEvent.blur(lastNameField);
+            await waitFor(() => {
+                expect(screen.getByText('Last name is too long')).toBeInTheDocument();
+            });
+        });
+
+        test('accepts valid last name', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const lastNameField = screen.getByLabelText(/Last name/i);
+            fireEvent.change(lastNameField, { target: { value: 'Doe' } });
+            fireEvent.blur(lastNameField);
+            await waitFor(() => {
+                expect(screen.queryByText('Last name is required')).not.toBeInTheDocument();
+                expect(screen.queryByText('Last name is too long')).not.toBeInTheDocument();
+            });
+        });
+    });
+
+    describe('Email Validation', () => {
+        test('shows error for empty email', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const emailField = screen.getByLabelText(/Email/i);
+            fireEvent.blur(emailField);
+            await waitFor(() => {
+                expect(screen.getByText('Email is required')).toBeInTheDocument();
+            });
+        });
+
+        test('shows error for invalid email', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const emailField = screen.getByLabelText(/Email/i);
+            fireEvent.change(emailField, { target: { value: 'not-an-email' } });
+            fireEvent.blur(emailField);
+            await waitFor(() => {
+                expect(screen.getByText('Invalid email address')).toBeInTheDocument();
+            });
+        });
+
+        test('accepts valid email', async () => {
+            render(
+                <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
+            );
+            const emailField = screen.getByLabelText(/Email/i);
+            fireEvent.change(emailField, { target: { value: 'john@example.com' } });
+            fireEvent.blur(emailField);
+            await waitFor(() => {
+                expect(screen.queryByText('Email is required')).not.toBeInTheDocument();
+                expect(screen.queryByText('Invalid email address')).not.toBeInTheDocument();
+            });
+        });
+    });
+
     describe('Form Validation States', () => {
         test('submit button is disabled with invalid form', async () => {
             render(
@@ -332,17 +476,21 @@ test('adds a booking to bookings state and localStorage on submit', async () => 
     tomorrow.setDate(tomorrow.getDate() + 1);
     const futureDate = tomorrow.toISOString().split('T')[0];
 
+    fireEvent.change(screen.getByLabelText(/First name/i), {target: {value: 'John'}});
+    fireEvent.change(screen.getByLabelText(/Last name/i), {target: {value: 'Doe'}});
+    fireEvent.change(screen.getByLabelText(/Email/i), {target: {value: 'john@example.com'}});
     fireEvent.change(screen.getByLabelText(/Choose date/i), {target: {value: futureDate}});
     fireEvent.change(screen.getByLabelText(/Choose reservation time/i), {target: {value: '18:00'}});
     fireEvent.change(screen.getByLabelText(/Number of guests/i), {target: {value: '3'}});
     fireEvent.change(screen.getByLabelText(/Select occasion/i), {target: {value: 'Anniversary'}});
     const submitButton = screen.getByRole('button', {name: /submit reservation form/i});
-    // check if the button is enabled
     fireEvent.click(submitButton);
 
-    // Wait for the main async operation to complete
     await waitFor(() => {
         expect(mockOnSubmit).toHaveBeenCalledWith({
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john@example.com',
             date: futureDate,
             time: '18:00',
             guests: 3,
@@ -350,12 +498,14 @@ test('adds a booking to bookings state and localStorage on submit', async () => 
         });
     });
 
-    // Then check synchronous state
     expect(submitButton).toBeEnabled();
 
     const bookings = JSON.parse(localStorage.getItem('bookings'));
     expect(bookings).toHaveLength(1);
     expect(bookings[0]).toEqual({
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@example.com',
         date: futureDate,
         time: '18:00',
         guests: 3,

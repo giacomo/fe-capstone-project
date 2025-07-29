@@ -26,7 +26,7 @@ function Header() {
               <span></span>
               <span></span>
             </button>
-            <Nav isMenuOpen={isMenuOpen} />
+            <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </div>
         </div>
       </div>
