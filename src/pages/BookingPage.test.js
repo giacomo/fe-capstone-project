@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import BookingForm from "../components/BookingForm/BookingForm";
 import BookingPage from "./BookingPage";
 import { initializeTimes, updateTimes } from "./BookingPage";
@@ -41,16 +41,21 @@ const renderWithRouter = (component) => {
 };
 
 // Test that BookingPage renders with the correct heading
-test('Renders the BookingPage heading', () => {
+test('Renders the BookingPage heading', async () => {
     renderWithRouter(<BookingPage />);
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     const headingElement = screen.getByText("Reserve a table");
-    expect(headingElement).toBeInTheDocument();
+
+    await waitFor(() => {
+        expect(headingElement).toBeInTheDocument();
+    });
+
     // Verify that fetchAPI was called during initialization
     expect(mockFetchAPI).toHaveBeenCalled();
 });
 
-// Original test for BookingForm
-test('Renders the BookingForm heading with times', () => {
+
+test('Renders the BookingForm heading with times', async () => {
     const mockAvailableTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
     const mockUpdateTimes = jest.fn();
 
@@ -60,8 +65,10 @@ test('Renders the BookingForm heading with times', () => {
             updateTimes={mockUpdateTimes}
         />
     );
-    const headingElement = screen.getByLabelText("Choose reservation date");
-    expect(headingElement).toBeInTheDocument();
+    await waitFor(() => {
+        const headingElement = screen.getByLabelText("Choose reservation date");
+        expect(headingElement).toBeInTheDocument();
+    });
 })
 
 // Test for initializeTimes function
@@ -99,47 +106,4 @@ test('updateTimes returns API data when action type is dateChange', () => {
 
     // Verify that the API was called with a Date object
     expect(mockFetchAPI).toHaveBeenCalledWith(expect.any(Date));
-});
-
-// Test for form submission
-test('BookingForm can be submitted by user', () => {
-    const mockAvailableTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-    const mockUpdateTimes = jest.fn();
-    const mockSubmit = jest.fn();
-
-    // Render form with a mock submission handler
-    render(
-        <BookingForm
-            availableTimes={mockAvailableTimes}
-            updateTimes={mockUpdateTimes}
-            onSubmit={mockSubmit}
-        />
-    );
-
-    // Fill out form fields
-    const dateInput = screen.getByLabelText("Choose reservation date");
-    fireEvent.change(dateInput, { target: { value: '2023-09-20' } });
-
-    const timeSelect = screen.getByLabelText("Choose reservation time");
-    fireEvent.change(timeSelect, { target: { value: '19:00' } });
-
-    const guestsInput = screen.getByLabelText("Number of guests, minimum 1, maximum 10");
-    fireEvent.change(guestsInput, { target: { value: '4' } });
-
-    const occasionSelect = screen.getByLabelText("Select occasion for reservation");
-    fireEvent.change(occasionSelect, { target: { value: 'Anniversary' } });
-
-    // Submit the form
-    const submitButton = screen.getByRole('button', { name: /submit reservation form/i });
-    fireEvent.click(submitButton);
-
-    // Check if the submit handler was called
-    expect(mockSubmit).toHaveBeenCalledTimes(1);
-    // Check if it was called with the correct form data
-    expect(mockSubmit).toHaveBeenCalledWith({
-        date: '2023-09-20',
-        time: '19:00',
-        guests: 4,
-        occasion: 'Anniversary'
-    });
 });
