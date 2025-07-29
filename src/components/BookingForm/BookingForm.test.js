@@ -86,7 +86,11 @@ describe('HTML5 Validation Attributes', () => {
             <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
         );
         const firstNameField = screen.getByLabelText(/First name/i);
-        expect(firstNameField).toHaveAttribute('type', 'text');
+
+        await waitFor(() => {
+            expect(firstNameField).toHaveAttribute('type', 'text');
+        });
+
         expect(firstNameField).toHaveAttribute('id', 'firstName');
         expect(firstNameField).toHaveAttribute('aria-required', 'true');
     });
@@ -96,7 +100,11 @@ describe('HTML5 Validation Attributes', () => {
             <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
         );
         const lastNameField = screen.getByLabelText(/Last name/i);
-        expect(lastNameField).toHaveAttribute('type', 'text');
+
+        await waitFor(() => {
+            expect(lastNameField).toHaveAttribute('type', 'text');
+        });
+
         expect(lastNameField).toHaveAttribute('id', 'lastName');
         expect(lastNameField).toHaveAttribute('aria-required', 'true');
     });
@@ -106,7 +114,11 @@ describe('HTML5 Validation Attributes', () => {
             <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={() => {}} />
         );
         const emailField = screen.getByLabelText(/Email/i);
-        expect(emailField).toHaveAttribute('type', 'email');
+
+        await waitFor(() => {
+            expect(emailField).toHaveAttribute('type', 'email');
+        });
+
         expect(emailField).toHaveAttribute('id', 'email');
         expect(emailField).toHaveAttribute('aria-required', 'true');
     });
@@ -287,8 +299,9 @@ describe('JavaScript Validation Functions', () => {
             );
             const firstNameField = screen.getByLabelText(/First name/i);
             fireEvent.blur(firstNameField);
+
             await waitFor(() => {
-                expect(screen.getByText('First name is required')).toBeInTheDocument();
+                expect(screen.getAllByText('First name is required')).toHaveLength(2);
             });
         });
 
@@ -299,8 +312,9 @@ describe('JavaScript Validation Functions', () => {
             const firstNameField = screen.getByLabelText(/First name/i);
             fireEvent.change(firstNameField, { target: { value: 'a'.repeat(51) } });
             fireEvent.blur(firstNameField);
+
             await waitFor(() => {
-                expect(screen.getByText('First name is too long')).toBeInTheDocument();
+                expect(screen.getAllByText('First name is too long')).toHaveLength(2);
             });
         });
 
@@ -313,8 +327,9 @@ describe('JavaScript Validation Functions', () => {
             fireEvent.blur(firstNameField);
             await waitFor(() => {
                 expect(screen.queryByText('First name is required')).not.toBeInTheDocument();
-                expect(screen.queryByText('First name is too long')).not.toBeInTheDocument();
             });
+
+            expect(screen.queryByText('First name is too long')).not.toBeInTheDocument();
         });
     });
 
@@ -326,7 +341,7 @@ describe('JavaScript Validation Functions', () => {
             const lastNameField = screen.getByLabelText(/Last name/i);
             fireEvent.blur(lastNameField);
             await waitFor(() => {
-                expect(screen.getByText('Last name is required')).toBeInTheDocument();
+                expect(screen.getAllByText('Last name is required')).toHaveLength(2);
             });
         });
 
@@ -338,7 +353,7 @@ describe('JavaScript Validation Functions', () => {
             fireEvent.change(lastNameField, { target: { value: 'b'.repeat(51) } });
             fireEvent.blur(lastNameField);
             await waitFor(() => {
-                expect(screen.getByText('Last name is too long')).toBeInTheDocument();
+                expect(screen.getAllByText('Last name is too long')).toHaveLength(2);
             });
         });
 
@@ -351,8 +366,9 @@ describe('JavaScript Validation Functions', () => {
             fireEvent.blur(lastNameField);
             await waitFor(() => {
                 expect(screen.queryByText('Last name is required')).not.toBeInTheDocument();
-                expect(screen.queryByText('Last name is too long')).not.toBeInTheDocument();
             });
+
+            expect(screen.queryByText('Last name is too long')).not.toBeInTheDocument();
         });
     });
 
@@ -364,7 +380,7 @@ describe('JavaScript Validation Functions', () => {
             const emailField = screen.getByLabelText(/Email/i);
             fireEvent.blur(emailField);
             await waitFor(() => {
-                expect(screen.getByText('Email is required')).toBeInTheDocument();
+                expect(screen.getAllByText('Email is required')).toHaveLength(2);
             });
         });
 
@@ -376,7 +392,7 @@ describe('JavaScript Validation Functions', () => {
             fireEvent.change(emailField, { target: { value: 'not-an-email' } });
             fireEvent.blur(emailField);
             await waitFor(() => {
-                expect(screen.getByText('Invalid email address')).toBeInTheDocument();
+                expect(screen.getAllByText('Invalid email address')).toHaveLength(2);
             });
         });
 
@@ -389,8 +405,9 @@ describe('JavaScript Validation Functions', () => {
             fireEvent.blur(emailField);
             await waitFor(() => {
                 expect(screen.queryByText('Email is required')).not.toBeInTheDocument();
-                expect(screen.queryByText('Invalid email address')).not.toBeInTheDocument();
             });
+
+            expect(screen.queryByText('Invalid email address')).not.toBeInTheDocument();
         });
     });
 
@@ -415,11 +432,17 @@ describe('JavaScript Validation Functions', () => {
             tomorrow.setDate(tomorrow.getDate() + 1);
             const futureDate = tomorrow.toISOString().split('T')[0];
 
+            const firstNameField = screen.getByLabelText(/First name/i);
+            const lastNameField = screen.getByLabelText(/Last name/i);
+            const emailField = screen.getByLabelText(/Email/i);
             const dateField = screen.getByLabelText(/Choose reservation date/i);
             const timeField = screen.getByLabelText(/Choose reservation time/i);
             const guestsField = screen.getByLabelText(/Number of guests/i);
             const occasionField = screen.getByLabelText(/Select occasion/i);
 
+            fireEvent.change(firstNameField, { target: { value: 'John' } });
+            fireEvent.change(lastNameField, { target: { value: 'Doe' } });
+            fireEvent.change(emailField, { target: { value: 'info@johndoe.com' } });
             fireEvent.change(dateField, { target: { value: futureDate } });
             fireEvent.change(timeField, { target: { value: '18:00' } });
             fireEvent.change(guestsField, { target: { value: '4' } });
@@ -446,8 +469,7 @@ describe('JavaScript Validation Functions', () => {
         });
     });
 });
-//
-//
+
 test('initializes bookings state from localStorage', async () => {
     localStorage.setItem('bookings', JSON.stringify([{
         date: '2025-07-28',
@@ -466,10 +488,10 @@ test('initializes bookings state from localStorage', async () => {
 });
 
 test('adds a booking to bookings state and localStorage on submit', async () => {
+    localStorage.clear();
     const mockOnSubmit = jest.fn();
     render(
-        <BookingForm availableTimes={['18:00']} updateTimes={() => {
-        }} onSubmit={mockOnSubmit}/>
+        <BookingForm availableTimes={['18:00']} updateTimes={() => {}} onSubmit={mockOnSubmit}/>
     );
 
     const tomorrow = new Date();
@@ -477,15 +499,37 @@ test('adds a booking to bookings state and localStorage on submit', async () => 
     const futureDate = tomorrow.toISOString().split('T')[0];
 
     fireEvent.change(screen.getByLabelText(/First name/i), {target: {value: 'John'}});
+    fireEvent.blur(screen.getByLabelText(/First name/i));
+
     fireEvent.change(screen.getByLabelText(/Last name/i), {target: {value: 'Doe'}});
+    fireEvent.blur(screen.getByLabelText(/Last name/i));
+
     fireEvent.change(screen.getByLabelText(/Email/i), {target: {value: 'john@example.com'}});
+    fireEvent.blur(screen.getByLabelText(/Email/i));
+
     fireEvent.change(screen.getByLabelText(/Choose date/i), {target: {value: futureDate}});
+    fireEvent.blur(screen.getByLabelText(/Choose date/i));
+
     fireEvent.change(screen.getByLabelText(/Choose reservation time/i), {target: {value: '18:00'}});
+    fireEvent.blur(screen.getByLabelText(/Choose reservation time/i));
+
     fireEvent.change(screen.getByLabelText(/Number of guests/i), {target: {value: '3'}});
+    fireEvent.blur(screen.getByLabelText(/Number of guests/i));
+
     fireEvent.change(screen.getByLabelText(/Select occasion/i), {target: {value: 'Anniversary'}});
+    fireEvent.blur(screen.getByLabelText(/Select occasion/i));
+
+
+    // Wait for validation to complete and form to become valid
+    await waitFor(() => {
+        const submitButton = screen.getByRole('button', {name: /submit reservation form/i});
+        expect(submitButton).not.toBeDisabled();
+    });
+
     const submitButton = screen.getByRole('button', {name: /submit reservation form/i});
     fireEvent.click(submitButton);
 
+    // Wait for submission to complete
     await waitFor(() => {
         expect(mockOnSubmit).toHaveBeenCalledWith({
             firstName: 'John',
@@ -498,8 +542,7 @@ test('adds a booking to bookings state and localStorage on submit', async () => 
         });
     });
 
-    expect(submitButton).toBeEnabled();
-
+    // Verify localStorage was updated
     const bookings = JSON.parse(localStorage.getItem('bookings'));
     expect(bookings).toHaveLength(1);
     expect(bookings[0]).toEqual({
@@ -531,10 +574,19 @@ test('submit button is enabled when form is valid', async () => {
         }} onSubmit={mockOnSubmit}/>
     );
 
-    fireEvent.change(screen.getByLabelText(/Choose date/i), {target: {value: '2025-07-28'}});
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const futureDate = tomorrow.toISOString().split('T')[0];
+
+
+    fireEvent.change(screen.getByLabelText(/First name/i), {target: {value: 'John'}});
+    fireEvent.change(screen.getByLabelText(/Last name/i), {target: {value: 'Doe'}});
+    fireEvent.change(screen.getByLabelText(/Email/i), {target: {value: 'info@johndoe.com'}});
+    fireEvent.change(screen.getByLabelText(/Choose date/i), {target: {value: futureDate }});
     fireEvent.change(screen.getByLabelText(/Choose reservation time/i), {target: {value: '18:00'}});
     fireEvent.change(screen.getByLabelText(/Number of guests/i), {target: {value: '3'}});
     fireEvent.change(screen.getByLabelText(/Select occasion/i), {target: {value: 'Anniversary'}});
+
     const submitButton = screen.getByRole('button', {name: /submit reservation form/i});
     // check if the button is enabled
     await waitFor(() => {

@@ -2,11 +2,14 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import App from './App';
 
+const mockNavigate = jest.fn();
+
 jest.mock('react-router', () => ({
   BrowserRouter: ({ children }) => <div>{children}</div>,
   Routes: ({ children }) => <div>{children}</div>,
   Route: ({ element }) => <div>{element}</div>,
-  Link: ({ children, to }) => <a href={to}>{children}</a>
+  Link: ({ children, to }) => <a href={to}>{children}</a>,
+  useNavigate: () => mockNavigate,
 }));
 
 // Mock components used in App.js
